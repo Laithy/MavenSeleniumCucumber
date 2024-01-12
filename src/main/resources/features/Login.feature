@@ -4,5 +4,6 @@ Feature: User should be able to login to the system
     Given User opens the browser
     And User navigates to login page
     When User enters correct username
-    And correct password
+    And Correct password
+    And Press login
     Then Success message appears
