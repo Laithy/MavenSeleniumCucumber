@@ -1,5 +1,6 @@
 package stepDefinition;
 
+import Pages.LoginPageWebElements;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -11,6 +12,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 public class LoginStepDefinition {
 
     WebDriver driver = null;
+    LoginPageWebElements elements = new LoginPageWebElements(driver);
 
     @Given("User opens the browser")
     public void User_Opens_The_Browser () throws InterruptedException {
@@ -32,23 +34,22 @@ public class LoginStepDefinition {
     @When("User enters correct username")
     public void User_Enters_Correct_Username () throws InterruptedException {
 
-        driver.findElement(By.name("username")).clear();
-        driver.findElement(By.name("username")).sendKeys("tomsmith");
+        elements.username().clear();
+        elements.username().sendKeys("tomsmith");
         Thread.sleep(1000);
 
     }
     @And("Correct password")
     public void Correct_Password () throws InterruptedException {
 
-        driver.findElement(By.name("password")).clear();
-        driver.findElement(By.name("password")).sendKeys("SuperSecretPassword!");
+        elements.password().clear();
+        elements.password().sendKeys("SuperSecretPassword!");
         Thread.sleep(1000);
 
     }
     @And("Press login")
     public void Press_Login () throws InterruptedException {
-
-        driver.findElement(By.name("password")).submit();
+        elements.loginButton().click();
         Thread.sleep(1000);
     }
     @Then("Success message appears")
