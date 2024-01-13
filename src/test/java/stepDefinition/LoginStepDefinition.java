@@ -1,29 +1,28 @@
 package stepDefinition;
 
 import Pages.LoginPageWebElements;
+import Pages.SecurePageWebElements;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 public class LoginStepDefinition {
 
-    WebDriver driver = null;
-    LoginPageWebElements elements = new LoginPageWebElements(driver);
+    WebDriver driver = new ChromeDriver();
+    LoginPageWebElements LpElements = new LoginPageWebElements(driver);
+    SecurePageWebElements SpElements = new SecurePageWebElements(driver);
 
     @Given("User opens the browser")
     public void User_Opens_The_Browser () throws InterruptedException {
-
         //Creating Driver
         String chromePath = System.getProperty("user.dir") + "\\src\\main\\resources\\chromedriver.exe";
         System.setProperty("webDriver.chrome.driver",chromePath);
-        driver = new ChromeDriver();
-        Thread.sleep(1000);
-
+//        driver = new ChromeDriver();
     }
+
     @And("User navigates to login page")
     public void User_Navigates_To_The_Login_Page () throws InterruptedException {
 
@@ -34,29 +33,32 @@ public class LoginStepDefinition {
     @When("User enters correct username")
     public void User_Enters_Correct_Username () throws InterruptedException {
 
-        elements.username().clear();
-        elements.username().sendKeys("tomsmith");
+        LpElements.username().clear();
+        LpElements.username().sendKeys("tomsmith");
         Thread.sleep(1000);
 
     }
     @And("Correct password")
     public void Correct_Password () throws InterruptedException {
 
-        elements.password().clear();
-        elements.password().sendKeys("SuperSecretPassword!");
+        LpElements.password().clear();
+        LpElements.password().sendKeys("SuperSecretPassword!");
         Thread.sleep(1000);
 
     }
     @And("Press login")
     public void Press_Login () throws InterruptedException {
-        elements.loginButton().click();
+        LpElements.loginButton().click();
         Thread.sleep(1000);
     }
     @Then("Success message appears")
     public void Success_Message_Appears () throws InterruptedException {
-
-        System.out.println(driver.findElement(By.id("flash")).getText());
+        System.out.println(SpElements.flashMsg().getText());
         Thread.sleep(1000);
-
+    }
+    @And("Press Logout")
+    public void Press_Logout() throws InterruptedException {
+        SpElements.logoutButton().click();
+        Thread.sleep(1000);
     }
 }

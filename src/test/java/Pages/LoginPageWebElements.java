@@ -9,8 +9,8 @@ public class LoginPageWebElements {
     WebDriver driver;
 
     //Constructor
-    public LoginPageWebElements (WebDriver MainDriver){
-        this.driver = MainDriver;
+    public LoginPageWebElements (WebDriver mainDriver){
+        mainDriver = this.driver;
     }
 
     //Username Locator

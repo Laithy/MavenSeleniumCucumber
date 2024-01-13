@@ -7,3 +7,4 @@ Feature: User should be able to login to the system
     And Correct password
     And Press login
     Then Success message appears
+    And Press Logout
