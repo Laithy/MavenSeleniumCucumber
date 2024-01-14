@@ -10,19 +10,16 @@ public class LoginPageWebElements {
 
     //Constructor
     public LoginPageWebElements (WebDriver mainDriver){
-        mainDriver = this.driver;
+        this.driver = mainDriver;
     }
-
     //Username Locator
     public WebElement username () {
         return driver.findElement(By.cssSelector("input[id=username]"));
     }
-
     //Password Locator
     public WebElement password (){
         return driver.findElement(By.cssSelector("input[id=password]"));
     }
-
     //Login button Locator
     public WebElement loginButton (){
         return driver.findElement(By.cssSelector("button[class=radius]"));
