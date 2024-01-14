@@ -6,6 +6,7 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
@@ -14,7 +15,6 @@ public class LoginStepDefinition {
     WebDriver driver = null;
     LoginPageWebElements LpElements;
     SecurePageWebElements SpElements;
-
 
     @Given("User opens the browser")
     public void User_Opens_The_Browser () throws InterruptedException {
@@ -27,7 +27,6 @@ public class LoginStepDefinition {
         SpElements = new SecurePageWebElements(driver);
 
     }
-
     @And("User navigates to login page")
     public void User_Navigates_To_The_Login_Page () throws InterruptedException {
         driver.navigate().to("https://the-internet.herokuapp.com/login");
@@ -57,6 +56,8 @@ public class LoginStepDefinition {
     @Then("Success message appears")
     public void Success_Message_Appears () throws InterruptedException {
         System.out.println(SpElements.flashMsg().getText());
+        String actualMsg = SpElements.flashMsg().getText();
+        Assert.assertTrue(actualMsg.contains("You logged into a secure area"));
         Thread.sleep(1000);
     }
     @And("Press Logout")
