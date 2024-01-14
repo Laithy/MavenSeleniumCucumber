@@ -32,19 +32,19 @@ public class LoginStepDefinition {
         driver.navigate().to("https://the-internet.herokuapp.com/login");
         Thread.sleep(1000);
     }
-    @When("User enters correct username")
-    public void User_Enters_Correct_Username () throws InterruptedException {
+    @When("^User enters username \"(.*)\"$")
+    public void User_Enters_Username (String username) throws InterruptedException {
 
         LpElements.username().clear();
-        LpElements.username().sendKeys("tomsmith");
+        LpElements.username().sendKeys(username);
         Thread.sleep(1000);
 
     }
-    @And("Correct password")
-    public void Correct_Password () throws InterruptedException {
+    @And("^Enters password \"(.*)\"$")
+    public void Enters_Password (String password) throws InterruptedException {
 
         LpElements.password().clear();
-        LpElements.password().sendKeys("SuperSecretPassword!");
+        LpElements.password().sendKeys(password);
         Thread.sleep(1000);
 
     }
@@ -58,6 +58,13 @@ public class LoginStepDefinition {
         System.out.println(SpElements.flashMsg().getText());
         String actualMsg = SpElements.flashMsg().getText();
         Assert.assertTrue(actualMsg.contains("You logged into a secure area"));
+        Thread.sleep(1000);
+    }
+    @Then("Failure message appears")
+    public void Failure_Message_Appears () throws InterruptedException {
+        System.out.println(SpElements.flashMsg().getText());
+        String actualMsg = SpElements.flashMsg().getText();
+        Assert.assertTrue(actualMsg.contains("is invalid!"));
         Thread.sleep(1000);
     }
     @And("Press Logout")
