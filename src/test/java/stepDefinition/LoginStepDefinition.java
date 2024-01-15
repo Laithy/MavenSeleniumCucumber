@@ -2,6 +2,7 @@ package stepDefinition;
 
 import Pages.LoginPageWebElements;
 import Pages.SecurePageWebElements;
+import io.cucumber.java.After;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -71,5 +72,10 @@ public class LoginStepDefinition {
     public void Press_Logout() throws InterruptedException {
         SpElements.logoutButton().click();
         Thread.sleep(1000);
+    }
+    @After
+    public void Close_driver () throws InterruptedException {
+        Thread.sleep(3000);
+        driver.quit();
     }
 }
